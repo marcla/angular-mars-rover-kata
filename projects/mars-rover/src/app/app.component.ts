@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
+import { PlanetGridComponent } from './features/planet-grid/planet-grid.component';
 
 @Component({
   selector: 'mr-root',
   standalone: true,
-  imports: [],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  imports: [PlanetGridComponent],
+  template: `<mr-planet-grid></mr-planet-grid>`,
+  styleUrl: './app.component.scss',
 })
-export class AppComponent {
-  title = 'mars-rover';
-}
+export class AppComponent {}
