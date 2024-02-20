@@ -1,18 +1,37 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
+import { NgIf } from '@angular/common';
+
+import { RoverComponent } from '../rover/rover.component';
 
 @Component({
   selector: 'mr-cell-grid',
   standalone: true,
-  imports: [],
-  template: `{{ xPos }} - {{ yPos }}`,
-  styles: `
-    :host {
-      display: block;
+  imports: [NgIf, RoverComponent],
+  template: `
+    <sup>{{ xPos() }} - {{ yPos() }}</sup>
+
+    @if (hasRover) {
+      <mr-rover></mr-rover>
     }
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  styles: `
+    :host {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    sup {
+      position: absolute;
+      top: 4px;
+      left: 4px;
+    }
+  `,
 })
 export class CellGridComponent {
-  @Input({ required: true }) yPos!: number;
-  @Input({ required: true }) xPos!: number;
+  xPos = input.required<number>();
+  yPos = input.required<number>();
+
+  hasRover = false;
 }
