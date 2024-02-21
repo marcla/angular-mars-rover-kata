@@ -2,10 +2,10 @@ import { NgForOf } from '@angular/common';
 import { AfterViewInit, Component, QueryList, ViewChildren, inject } from '@angular/core';
 
 import { SelectionModel } from '../../core/common/selection-model';
-import { Coordinates } from '../../core/model/coords.model';
-import { CoordinatesService } from '../../core/services/coordinates.service';
+import { StringCoordinates } from '../../core/model/coords.model';
 import { GridService } from './grid.service';
 import { CellGridComponent } from './cell-grid.component';
+import { Coordinates } from '../../core/common/coordinates.class';
 
 @Component({
   selector: 'mr-planet-grid',
@@ -51,25 +51,15 @@ export class PlanetGridComponent implements AfterViewInit {
 
   // services
   private gridService = inject(GridService);
-  private coordService = inject(CoordinatesService);
 
-  private archive = new SelectionModel<Coordinates, CellGridComponent>();
+  private archive = new SelectionModel<StringCoordinates, CellGridComponent>();
   readonly grid = this.gridService.generate();
 
   ngAfterViewInit(): void {
     this.cells.forEach((item: CellGridComponent) => {
-      const coords = this.coordService.toString(item.xPos(), item.yPos());
+      const coords = new Coordinates(item.xPos(), item.yPos()).toString();
 
       this.archive.set(coords, item);
     });
-
-    setTimeout(() => {
-      const findRandomItem = this.archive.get(this.coordService.toString(7, 9));
-
-      if (findRandomItem) {
-        findRandomItem.hasRover = true;
-        console.log(findRandomItem);
-      }
-    }, 3000);
   }
 }

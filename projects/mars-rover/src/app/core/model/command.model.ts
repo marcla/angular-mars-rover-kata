@@ -5,8 +5,10 @@ export const COMMANDS = {
   right: 'r',
 } as const;
 
-type TurnCommandKeys = keyof Pick<typeof COMMANDS, 'left' | 'right'>;
+type CommandKeys = keyof typeof COMMANDS;
+type WayCommandKeys = keyof Pick<typeof COMMANDS, 'left' | 'right'>;
 type MoveCommandKeys = keyof Pick<typeof COMMANDS, 'forward' | 'backward'>;
 
-export type TurnCommands = (typeof COMMANDS)[TurnCommandKeys];
-export type MoveCommands = (typeof COMMANDS)[MoveCommandKeys];
+export type Command = (typeof COMMANDS)[CommandKeys];
+export type WayCommand = (typeof COMMANDS)[WayCommandKeys];
+export type MoveCommand = (typeof COMMANDS)[MoveCommandKeys];

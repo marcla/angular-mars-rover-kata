@@ -1,6 +1,8 @@
-import { Component, input } from '@angular/core';
 import { NgIf } from '@angular/common';
+import { Component, computed, inject, input } from '@angular/core';
 
+import { Coordinates } from '../../core/common/coordinates.class';
+import { RoverStateService } from '../../core/services/rover-state.service';
 import { RoverComponent } from '../rover/rover.component';
 
 @Component({
@@ -10,7 +12,7 @@ import { RoverComponent } from '../rover/rover.component';
   template: `
     <sup>{{ xPos() }} - {{ yPos() }}</sup>
 
-    @if (hasRover) {
+    @if (hasRover()) {
       <mr-rover></mr-rover>
     }
   `,
@@ -30,8 +32,12 @@ import { RoverComponent } from '../rover/rover.component';
   `,
 })
 export class CellGridComponent {
+  private roverState = inject(RoverStateService);
+
   xPos = input.required<number>();
   yPos = input.required<number>();
 
-  hasRover = false;
+  hasRover = computed(
+    () => this.roverState.position().toString() === new Coordinates(this.xPos(), this.yPos()).toString()
+  );
 }
