@@ -1,11 +1,8 @@
 import { NgForOf } from '@angular/common';
-import { AfterViewInit, Component, QueryList, ViewChildren, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
-import { SelectionModel } from '../../core/common/selection-model';
-import { StringCoordinates } from '../../core/model/coords.model';
-import { GridService } from './grid.service';
 import { CellGridComponent } from './cell-grid.component';
-import { Coordinates } from '../../core/common/coordinates.class';
+import { GridService } from '../../core/services/grid.service';
 
 @Component({
   selector: 'mr-planet-grid',
@@ -28,8 +25,8 @@ import { Coordinates } from '../../core/common/coordinates.class';
     }
 
     .grid {
-      // border-top: 1px dashed #ccc;
-      // border-left: 1px dashed #ccc;
+      border-top: 1px dashed var(--mr-grid-cell-border-color);
+      border-left: 1px dashed var(--mr-grid-cell-border-color);
     }
 
     .grid__row {
@@ -37,29 +34,17 @@ import { Coordinates } from '../../core/common/coordinates.class';
     }
 
     .grid__cell {
-      width: 50px;
-      height: 50px;
+      width: var(--mr-grid-cell-size);
+      height: var(--mr-grid-cell-size);
 
-      background-color: #bf1104;
-      border-right: 1px dashed #ccc;
-      border-bottom: 1px dashed #ccc;
+      background-color: var(--mr-grid-background-color);
+      border-right: 1px dashed var(--mr-grid-cell-border-color);
+      border-bottom: 1px dashed var(--mr-grid-cell-border-color);
     }
   `,
 })
-export class PlanetGridComponent implements AfterViewInit {
-  @ViewChildren(CellGridComponent) cells!: QueryList<CellGridComponent>;
-
-  // services
+export class PlanetGridComponent {
   private gridService = inject(GridService);
 
-  private archive = new SelectionModel<StringCoordinates, CellGridComponent>();
   readonly grid = this.gridService.generate();
-
-  ngAfterViewInit(): void {
-    this.cells.forEach((item: CellGridComponent) => {
-      const coords = new Coordinates(item.xPos(), item.yPos()).toString();
-
-      this.archive.set(coords, item);
-    });
-  }
 }

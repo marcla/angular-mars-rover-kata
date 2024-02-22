@@ -1,6 +1,6 @@
 import { ApplicationConfig, InjectionToken } from '@angular/core';
 
-const PLANET_GRID_SIZE = 14 as const;
+const PLANET_GRID_SIZE = 8 as const;
 export interface AppConfig {
   gridSize: typeof PLANET_GRID_SIZE;
 }

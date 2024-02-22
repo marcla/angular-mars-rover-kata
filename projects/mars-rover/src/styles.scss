@@ -1,1 +1,59 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --mr-grid-background-color: #8f3331;
+  --mr-grid-cell-size: 80px;
+  --mr-grid-cell-border-color: #ccc;
+}
+
+@font-face {
+  font-family: "Suisse Int'l";
+  src: url('/assets/fonts/suisseintl-regular/SuisseIntl-Regular-WebS.eot');
+  src:
+    url('/assets/fonts/suisseintl-regular/SuisseIntl-Regular-WebS.eot?#iefix') format('embedded-opentype'),
+    url('/assets/fonts/suisseintl-regular/SuisseIntl-Regular-WebS.woff2') format('woff2'),
+    url('/assets/fonts/suisseintl-regular/SuisseIntl-Regular-WebS.woff') format('woff'),
+    url('/assets/fonts/suisseintl-regular/SuisseIntl-Regular-WebS.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Suisse Int'l";
+  src: url('/assets/fonts/suisseintl-bold/SuisseIntl-Bold-WebS.eot');
+  src:
+    url('/assets/fonts/suisseintl-bold/SuisseIntl-Bold-WebS.eot?#iefix') format('embedded-opentype'),
+    url('/assets/fonts/suisseintl-bold/SuisseIntl-Bold-WebS.woff2') format('woff2'),
+    url('/assets/fonts/suisseintl-bold/SuisseIntl-Bold-WebS.woff') format('woff'),
+    url('/assets/fonts/suisseintl-bold/SuisseIntl-Bold-WebS.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Suisse Int'l";
+  src: url('/assets/fonts/suisseintl-medium/SuisseIntl-Medium-WebS.eot');
+  src:
+    url('/assets/fonts/suisseintl-medium/SuisseIntl-Medium-WebS.eot?#iefix') format('embedded-opentype'),
+    url('/assets/fonts/suisseintl-medium/SuisseIntl-Medium-WebS.woff2') format('woff2'),
+    url('/assets/fonts/suisseintl-medium/SuisseIntl-Medium-WebS.woff') format('woff'),
+    url('/assets/fonts/suisseintl-medium/SuisseIntl-Medium-WebS.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Suisse Int'l";
+  src: url('/assets/fonts/suisseintl-semibold/SuisseIntl-SemiBold-WebS.eot');
+  src:
+    url('/assets/fonts/suisseintl-semibold/SuisseIntl-SemiBold-WebS.eot?#iefix') format('embedded-opentype'),
+    url('/assets/fonts/suisseintl-semibold/SuisseIntl-SemiBold-WebS.woff2') format('woff2'),
+    url('/assets/fonts/suisseintl-semibold/SuisseIntl-SemiBold-WebS.woff') format('woff'),
+    url('/assets/fonts/suisseintl-semibold/SuisseIntl-SemiBold-WebS.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+body {
+  font-family: "Suisse Int'l";
+}
+

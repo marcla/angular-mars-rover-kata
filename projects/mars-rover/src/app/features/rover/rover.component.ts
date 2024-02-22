@@ -1,9 +1,8 @@
-import { ChangeDetectionStrategy, Component, HostBinding, effect, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, inject } from '@angular/core';
 
 import { Directions } from '../../core/services/navigation-system.service';
 import { RoverStateService } from '../../core/services/rover-state.service';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 type RoverContext = {
   direction: Directions;
 };
@@ -12,10 +11,19 @@ type RoverContext = {
   selector: 'mr-rover',
   standalone: true,
   imports: [],
-  template: `<b>MR</b>`,
+  template: `<img src="/assets/images/mars-rover.png" alt="Rover vehicle" />`,
   styles: `
     :host {
-      display: block;
+      display: flex;
+      width: 100%;
+      height: 100%;
+      align-content: center;
+      justify-content: center;
+    }
+
+    img {
+      width: 82%;
+      object-fit: contain;
     }
 
     :host-context(.direction-n) {

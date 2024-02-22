@@ -3,8 +3,10 @@ import { Injectable, inject } from '@angular/core';
 import { INDEX_OF_NOT_FOUND_VALUE } from '../common/const';
 import { Index } from '../model/app.model';
 
-import { GridService } from '../../features/planet-grid/grid.service';
+import { GridService } from './grid.service';
 import { Coordinates } from '../common/coordinates.class';
+import { ObstacleRegistry } from '../common/obstacle.class';
+import { MR_ERROR_OBSTACLE_FOUND } from '../common/error';
 
 export const DIRECTIONS = {
   NORTH: 'N',
@@ -21,6 +23,7 @@ export type Directions = (typeof DIRECTIONS)[DirectionKeys];
 })
 export class NavigationSystemService {
   private planet = inject(GridService);
+  private obscacleRegistry = inject(ObstacleRegistry);
 
   private readonly directions = Object.values(DIRECTIONS);
   private readonly borderDirections = this.directions.length - 1;
@@ -74,18 +77,23 @@ export class NavigationSystemService {
     const isVerticalDirection = verticalDirections.includes(dir);
     let increaseCoeff = increaseDirections.includes(dir) ? 1 : -1;
     increaseCoeff *= directionCoeff;
+    let outputPosition = position;
 
     if (isVerticalDirection) {
       const newPosY = position.y + increaseCoeff;
 
-      // position.y = this.checkEdgeMap(newPosY);
-      return position.setY(this.checkEdgeMap(newPosY));
+      outputPosition = outputPosition.setY(this.checkEdgeMap(newPosY));
     } else {
       const newPosX = position.x + increaseCoeff;
 
-      // position.x = this.checkEdgeMap(newPosX);
-      return position.setX(this.checkEdgeMap(newPosX));
+      outputPosition = outputPosition.setX(this.checkEdgeMap(newPosX));
     }
+
+    if (this.obscacleRegistry.has(outputPosition.toString())) {
+      throw new Error(MR_ERROR_OBSTACLE_FOUND);
+    }
+
+    return outputPosition;
   }
 
   checkEdgeMap(newPos: number): number {
